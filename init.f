@@ -1,0 +1,119 @@
+*
+*     program an
+      implicit real*8 (a-h,o-z)
+      parameter (Imax=257, Jmax=65, Kmax=257, N=1e5, NZ=1e7)
+      character*12 fncp,fndat
+      dimension
+     > u(0:Imax,0:Jmax,0:Kmax)
+     >,v(0:Imax,0:Jmax,0:Kmax)
+     >,w(0:Imax,0:Jmax,0:Kmax)
+     >,p(0:Imax,0:Jmax,0:Kmax)
+     >,p0(0:Imax,0:Jmax,0:Kmax)
+      common
+     >/dim/Xmax,rkap,tors,epsr
+     >/dimx/hx,Im,kd
+     >/dimr/rt(0:128),rt1(0:128),yt(129),yt1(129),hr,Jm
+     >/dimt/ht,Km
+     >/sst/snn(0:257,0:257),snm(0:257,0:257)
+     >     ,smn(0:257,0:257),smm(0:257,0:257)
+     >/Re/Re
+     >/pressMatr/irowInd(1e7),icolInd(1e7),irowPtr(1e5),values(1e7)
+     >,irowsNum
+     >/linSolver/iparam(6),rparam(5),IRFAC(1e7),JCFAC(1e7)
+     >,IPVT(1e5),JPVT(1e5),FACT(1e7),ipath,NL,NFAC
+*
+      open(5,file='init.car')
+      read(5,*) Re
+      read(5,*) rkap
+      read(5,*) tors
+      read(5,*) Xmax
+      read(5,*) Im
+      read(5,*) Jm,epsr
+      read(5,*) Km
+      read(5,*) dt
+      read(5,*) amp
+      read(5,*) fncp
+*
+      call com(u,v,w,p,p0,Imax,Jmax,N,NZ)
+      one=1.d0
+      pi=4.d0*atan(one)
+      t = 0.0
+*
+      write(*,*)' ***************************************************'
+      write(*,200) t,dt,Re,Xmax,rkap,tors,epsr,Im,Jm,Km
+      write(*,*)' ***************************************************'
+200   format(' *  t=',1pe10.3,' dt=',e9.2,' Re=',e9.2
+     >'            *',/,
+     >' *  Xmax=',0pf6.2,'  rkap=',f6.2,'  tors=',f6.2,' epsr=',f6.2
+     >,'  Im=',i3,'  Jm=',i3,'  Km=',i3,'   *')
+*
+      if(Im.gt.Imax-1.or.Im.gt.256) then
+        write(*,*)'  Im=',Im,'  is greater than   Imax-1=',Imax-1
+        stop
+      end if
+      if(Jm.gt.Jmax-1.or.Jm.gt.128) then
+        write(*,*)'  Jm=',Jm,'  is greater than   Jmax-1=',Jmax-1
+        stop
+      end if
+      if(Km.gt.Kmax-1.or.Km.gt.256) then
+        write(*,*)'  Km=',Km,'  is greater than   Kmax=',Kmax
+        stop
+      end if
+*
+*
+      do k=1,Km
+        do j=1,Jm
+            do i=1,Im
+            u(i,j,k)=(1.-yt(j)**2)*sin(2.*pi*i/Im)*cos(2.*pi*k/Km)
+            v(i,j,k)=0.
+            w(i,j,k)=0.
+          end do
+        end do
+      end do
+      p(0,0,1)=0.
+      call presLame(u,v,w,p,p0,Imax,Jmax,N,NZ)
+      ss=0.
+      aa=0.
+      do k=1,Km
+      do j=1,Jm
+        do i=1,Im
+          hss=1.+yt(j)*smm(i,k)
+          aa=aa+hss*yt(j)*yt1(j)*(u(i,j,k)**2+v(i,j,k)**2+w(i,j,k)**2)
+          ss=ss+hss*yt(j)*yt1(j)
+        end do
+      end do
+      end do
+      c=amp/sqrt(aa/ss)
+      do k=1,Km
+        do j=1,Jm
+            do i=1,Im
+            u(i,j,k)=c*u(i,j,k)+1.-yt(j)**2
+            v(i,j,k)=c*v(i,j,k)
+            w(i,j,k)=c*w(i,j,k)
+          end do
+        end do
+      end do
+
+
+
+        open(9,file=fncp,form='unformatted')
+        write(9)t,dt,Re,Xmax,rkap,tors,epsr,Im,Jm,Km
+        do k=1,Km
+          do j=1,Jm
+            write(9)(u(i,j,k),i=1,Im)
+            write(9)(v(i,j,k),i=1,Im)
+            write(9)(w(i,j,k),i=1,Im)
+          end do
+        end do
+        close(9)
+        close(8)
+        write(*,*)'*************************************************'
+        write(*,*)'*               Control Point                   *'
+        write(*,*)'*************************************************'
+*      pause
+      stop
+1     write(*,*)'  File ',fncp,' was not found'
+100   format(10(1pe12.4))
+      stop
+      end
+      
