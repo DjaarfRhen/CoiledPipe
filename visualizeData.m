@@ -1,6 +1,5 @@
 
-%folder = 'pipe_curv001_tors100/';
-folder = '';
+folder = 'log/';
 format = '-dpng';
 step1 = 2;
 step2 = 2;

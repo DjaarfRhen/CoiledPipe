@@ -133,7 +133,7 @@
       end do
 	  
 * C CHECK: save x to file
-*     open(unit=1, file='vort3theta.txt') 
+*     open(unit=1, file='log/vort3theta.txt') 
 *     do k=1,Km
 *       do j=1,Jm
 *         do i=0,Im
@@ -143,7 +143,7 @@
 *     end do
 *     close(1)
 * C CHECK: save x to file
-*     open(unit=1, file='vort2r.txt') 
+*     open(unit=1, file='log/vort2r.txt') 
 *     do k=0,Km
 *       do j=1,Jm
 *         do i=0,Im

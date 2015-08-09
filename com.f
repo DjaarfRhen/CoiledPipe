@@ -78,7 +78,7 @@
       end if
 	  
 C CHECK: save rth to file
-      open(unit=1, file='rth.txt')
+      open(unit=1, file='log/rth.txt')
       do i = 1, Jm
          write(1,*) yt(i)
       enddo
@@ -195,7 +195,7 @@ C Solve A * X(i) = B(i)
 ***********************************************************
 
 C CHECK: save rhs to file
-*     open(unit=1, file='x.txt')
+*     open(unit=1, file='log/x.txt')
 *     do i = 1, irowsNum
 *        write(1,*) x(i)
 *     enddo

@@ -91,7 +91,7 @@
 
 *
 * C CHECK: save x to file
-      open(unit=1, file='u0.txt') 
+      open(unit=1, file='log/u0.txt') 
       do k=1,Km
         do j=1,Jm
           do i=1,Im
@@ -112,7 +112,7 @@
 
 *
 * C CHECK: save x to file
-      open(unit=1, file='u0div.txt') 
+      open(unit=1, file='log/u0div.txt') 
       do k=1,Km
         do j=1,Jm
           do i=0,Im
@@ -123,7 +123,7 @@
       close(1)
  
 * C CHECK: save x to file
-      open(unit=1, file='v0div.txt') 
+      open(unit=1, file='log/v0div.txt') 
       do k=1,Km
         do j=0,Jm
           do i=1,Im
@@ -134,7 +134,7 @@
       close(1)	  
  
 * C CHECK: save x to file
-      open(unit=1, file='w0div.txt') 
+      open(unit=1, file='log/w0div.txt') 
       do k=0,Km
         do j=1,Jm
           do i=1,Im
@@ -149,7 +149,7 @@
       
       call rp(t,u,v,w,u1,v1,w1,ox,or,ot,Imax,Jmax)
 
-        open(unit=1, file='ut.txt') 
+        open(unit=1, file='log/ut.txt') 
         do i=0,Im
           do j=1,Jm
             do k=1,Km
@@ -159,7 +159,7 @@
         end do
         close(1)
         
-        open(unit=1, file='vt.txt') 
+        open(unit=1, file='log/vt.txt') 
         do i=1,Im
           do j=0,Jm
             do k=1,Km
@@ -169,7 +169,7 @@
         end do
         close(1)
         
-        open(unit=1, file='wt.txt') 
+        open(unit=1, file='log/wt.txt') 
         do i=1,Im
           do j=1,Jm
             do k=0,Km
@@ -296,11 +296,11 @@
         close(9)
         close(8)
         
-        open(unit=1, file='parameters.txt') 
+        open(unit=1, file='log/parameters.txt') 
         write(1,*) Re,Xmax,rkap,tors,epsr,Im,Jm,Km
         close(1)
         
-        open(unit=1, file='u.txt') 
+        open(unit=1, file='log/u.txt') 
         do i=0,Im
           do j=1,Jm
             do k=1,Km
@@ -310,7 +310,7 @@
         end do
         close(1)
         
-        open(unit=1, file='v.txt') 
+        open(unit=1, file='log/v.txt') 
         do i=1,Im
           do j=0,Jm
             do k=1,Km
@@ -320,7 +320,7 @@
         end do
         close(1)
         
-        open(unit=1, file='w.txt') 
+        open(unit=1, file='log/w.txt') 
         do i=1,Im
           do j=1,Jm
             do k=0,Km
@@ -330,7 +330,7 @@
         end do
         close(1)
         
-        open(unit=1, file='p.txt') 
+        open(unit=1, file='log/p.txt') 
         do i=1,Im
           do j=1,Jm
             do k=1,Km
