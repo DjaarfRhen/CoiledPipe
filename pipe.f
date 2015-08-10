@@ -180,7 +180,7 @@
         close(1)
 
         write(*,*) 'velocity time step'
-        pause
+*        pause
 
 
 
@@ -253,7 +253,7 @@
       p(0,0,1) = 0.5  
       call presLame(u1,v1,w1,p,p0,Imax,Jmax,N,NZ)
 
-      pause
+*      pause
 *      stop
 *
       open(8,file=fndat,access='append')

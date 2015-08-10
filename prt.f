@@ -55,11 +55,12 @@
       pw = w(Im/2,Jm/2,Km/2)
       pv = v(Im/2,Jm/2,Km/2)
 *
-      write(8,120)t,dt,Dp,amp,ucl,dd,pu,pv,pw
+      write(8,120)t,dt,Dp,amp,ucl,dd,pu,pv,pw,ubulk
       write(*,110)Dp,amp,ucl,dd,pu,pv,pw
 *      write(*,*) 'amp=',amp
 *120   format(1pe14.6,15e12.4)
-120   format(1pe12.6,e12.2,e12.2,e12.4,e12.4,e12.4,e12.4,e12.4,e12.4)
+120   format(1pe12.6,e12.2,e12.2,e12.4,e12.4,e12.4,e12.4,e12.4,
+     > e12.4,e12.4)
 	 
 110   format('    Dp=',1pe12.4,'  amp=',e12.4,'  Ucl=',e12.4,
      >       '  Div=',e12.4,' pu=',e12.4,' pv=',e12.4,' pw=',e12.4)
