@@ -3,6 +3,7 @@ log/
 *.exe
 *.txt
 *.dat
+*.cp
 
 
 # Windows image file caches
@@ -48,4 +49,3 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
-run.cp
