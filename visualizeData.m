@@ -1,6 +1,6 @@
 
 folder = 'log/';
-format = '-dpng';
+format = '-deps';
 step1 = 2;
 step2 = 2;
 scale = 1.0;

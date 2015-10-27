@@ -1,10 +1,10 @@
- 3000.        - Re
- 0.0        - rkap
- 0.0        - tors
- 5.0        - Xmax
- 10          - Im
- 30 0.25     - Jm, epsr
- 30          - Km
+ 1000.       - Re
+ 0.01        - rkap
+ 0.0         - tors
+ 1.0         - Xmax
+ 2           - Im
+ 50 1.0     - Jm, epsr
+ 50          - Km
  0.01        - dt
- 1.0       - amp
+ 1.0         - amp
  run.cp
