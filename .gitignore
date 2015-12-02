@@ -1,10 +1,17 @@
-# logs and exe
+# log folder
 log/
 *.exe
 *.txt
 *.dat
 *.cp
+*.png
 
+# aux files
+*.exe
+*.txt
+*.dat
+*.cp
+*.png
 
 # Windows image file caches
 Thumbs.db
