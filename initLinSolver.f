@@ -30,6 +30,32 @@
 C Poisson matrix generation 
       call matrGen(values, irowPtr, icolInd, innzNum, irowsNum)
 
+
+C CHECK: save to file
+      open(unit=1, file='log/values.txt')
+      do i = 1, innzNum
+         write(1,*) values(i)
+      enddo
+      close(1)
+C CHECK: save to file
+      open(unit=1, file='log/irowPtr.txt')
+      do i = 1, irowsNum+1
+         write(1,*) irowPtr(i)
+      enddo
+      close(1)
+C CHECK: save to file
+      open(unit=1, file='log/icolInd.txt')
+      do i = 1, innzNum
+         write(1,*) icolInd(i)
+      enddo
+      close(1)
+
+
+
+
+
+      
+      
 C Poisson matrix conversion
       do iRow = 1,irowsNum
          do l = irowPtr(iRow),(irowPtr(iRow+1)-1)
@@ -37,6 +63,20 @@ C Poisson matrix conversion
          end do
       end do
 
+      
+      
+C CHECK: save to file
+      open(unit=1, file='log/irowInd.txt')
+      do i = 1, innzNum
+         write(1,*) irowInd(i)
+      enddo
+      close(1)      
+      
+ 
+ 
+ 
+      
+      
       ipath = 1
       CALL DL4LXG(iparam, rparam) 
       iparam(5) = 1e8           
@@ -46,7 +86,9 @@ C Perform LU factorization
       CALL DLFTXG (irowsNum, innzNum, values, irowInd, icolInd, iparam,
      > rparam, NFAC, NL, FACT, IRFAC, JCFAC, IPVT, JPVT)
 
-
+*      write(*,*)'stop'
+*      stop
+      
 ***********************************************************
 ***********************************************************
 ***********************************************************

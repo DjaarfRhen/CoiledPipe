@@ -1,4 +1,4 @@
 call makeInit
 call init
-call make
+call makePipe
 call pipe

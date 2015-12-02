@@ -1,5 +1,5 @@
 *
-      subroutine prt(t,dt,u,v,w,p,Imax,Jmax)
+      subroutine prt2screen(t,dt,u,v,w,p,Imax,Jmax)
       implicit real*8 (a-h,o-z)
       dimension
      > u(0:Imax,0:Jmax,0:*)
@@ -55,17 +55,12 @@
       pw = w(Im/2,Jm/2,Km/2)
       pv = v(Im/2,Jm/2,Km/2)
 *
-      write(8,120)t,dt,Dp,amp,ucl,dd,pu,pv,pw,ubulk
-      write(*,110)t,dt,Dp,amp,ucl,dd,pu,pv,pw,ubulk
-*      write(*,*) 'amp=',amp
-*120   format(1pe14.6,15e12.4)
-120   format(1pe12.6,e12.2,e12.2,e12.4,e12.4,e12.4,e12.4,e12.4,
-     > e12.4,e12.4)
-	 
+      write(*,110)t,dt,Dp,amp,ucl,dd,pu,pv,pw,ubulk	 
 110   format('  t=',e12.4,'  dt=',e12.4,
      >       '  Dp=',1pe12.4,'  amp=',e12.4,'  Ucl=',e12.4,
      >       '  Div=',e12.4,' pu=',e12.4,' pv=',e12.4,' pw=',e12.4,
      >       '  ubulk=',e12.4)
+
       return
       end
 

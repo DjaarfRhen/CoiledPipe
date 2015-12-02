@@ -1,0 +1,17 @@
+ 1000.       - Re
+ 0.0         - rkap
+ 0.0         - tors
+ 1.0         - Xmax
+ 1           - Im
+ 32 0.25     - Jm, epsr
+ 64          - Km
+ 0.01        - dt
+ 0.0         - amp
+ run.cp      - fncp 
+ 1.e-2       - tol
+ 300        - kprt
+ 20          - kwrt
+ 1000.0      - tmax
+ 0.25        - dtmax
+ a0.dat      - fndat
+ run.cp

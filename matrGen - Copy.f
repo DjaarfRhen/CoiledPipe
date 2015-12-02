@@ -141,25 +141,35 @@ c                  iE = iRow - (Im - 1)
                
                
                
-		       if (iW.EQ.iT) then
-			      aT = aT + aW
-			      iW = -1
+               if (iN_.EQ.iP) then
+			      aP = aP + aN
+			      iN_ = -1
                endif
 
-		       if (iE.EQ.iT) then
-			      aT = aT + aE
-			      iE = -1
-               endif               
-               
-               
- 		       if (iW.EQ.iB) then
-			      aB = aB + aW
-			      iW = -1
+		       if (iS.EQ.iP) then
+			      aP = aP + aS
+			      iS = -1
                endif
 
-		       if (iE.EQ.iB) then
-			      aB = aB + aE
-			      iE = -1
+		       if (iN_.EQ.iS) then
+			      aN_ = aN_ + aS
+			      iS = -1
+               endif
+               
+               
+               if (iT.EQ.iP) then
+			      aP = aP + aT
+			      iT = -1
+               endif
+
+		       if (iB.EQ.iP) then
+			      aP = aP + aB
+			      iB = -1
+               endif
+
+		       if (iT.EQ.iB) then
+			      aT = aT + aB
+			      iB = -1
                endif
 
 *              =================================================================

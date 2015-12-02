@@ -29,7 +29,6 @@
 *
 
       
-      
       iserv=0
       one=1.d0
       pi=4.d0*atan(one)
@@ -37,17 +36,30 @@
 * dimt
       ht=2.d0*pi/Km
 * dimx
+      kd = 0
       if(tors.ne.0) then
         kd=tors*Xmax/ht
         Xm0=kd*ht/tors
         Xm1=(kd+1)*ht/tors
-        if (Xm1-Xmax.lt.Xmax-Xm0) then
-           kd=kd+1
-        end if
+* this is round-off to the closest value
+* but some times ZERO happens 
+* so it is safer to enlarge Xmax in any case       
+*        if (Xm1-Xmax.lt.Xmax-Xm0) then
+*           kd=kd+1
+*        end if
+        kd=kd+1
         Xmax=kd*ht/tors
       end if
       kd=mod(kd,Km)
       hx=Xmax/Im
+      
+      write(*,33) Xmax
+33    format(' Xmax=',e9.3)
+      
+      open(unit=1, file='log/parameters.txt', access='append') 
+      write(1,*) Xmax,kd
+      close(1)
+      
 * dimr
       hr=1./Jm
       if(epsr.eq.1.) then
@@ -76,6 +88,7 @@
           yt1(j)=rrt(ro,1)*hr
         end do
       end if
+
 	  
 C CHECK: save rth to file
       open(unit=1, file='log/rth.txt')
@@ -138,10 +151,23 @@ c        smn(i,k)=-rkap*cos(tt-tors*s)
       end do
 
 
+      
+*      write(*,*)' ***************************************************'
+*      write(*,200) Xmax,rkap,tors,epsr,kd,Im,Jm,Km
+*      write(*,*)' ***************************************************'
+*200   format(
+*     >'            *',/,
+*     >' *  Xmax=',0pf6.2,'  rkap=',f6.2,'  tors=',f6.2,' epsr=',f6.2
+*     >' *  kd=',i3
+*     >,'  Im=',i3,'  Jm=',i3,'  Km=',i3,'   *')
+     
+     
+     
+     
       call initLinSolver(Imax,Jmax,N,NZ)
 
       
-      
+     
       
 * pressure gradient    initialization  
       do k=1,Km
@@ -167,11 +193,11 @@ c        smn(i,k)=-rkap*cos(tt-tors*s)
       rhs(1)=0.0
       
 C CHECK: save rhs to file
-*     open(unit=1, file='rhs.txt')
-*     do i = 1, irowsNum
-*        write(1,*) rhs(i)
-*     enddo
-*     close(1)
+      open(unit=1, file='log/com_rhs.txt')
+      do i = 1, irowsNum
+         write(1,*) rhs(i)
+      enddo
+      close(1)
 ***********************************************************
 ***********************************************************
 ***********************************************************
@@ -195,11 +221,11 @@ C Solve A * X(i) = B(i)
 ***********************************************************
 
 C CHECK: save rhs to file
-*     open(unit=1, file='log/x.txt')
-*     do i = 1, irowsNum
-*        write(1,*) x(i)
-*     enddo
-*     close(1)
+      open(unit=1, file='log/com_x.txt')
+      do i = 1, irowsNum
+         write(1,*) x(i)
+      enddo
+      close(1)
       
       dd = 0.0;
       do k=1,Km  
@@ -270,7 +296,7 @@ C CHECK: save rhs to file
       
       write(*,*)'  Dp=',Dp
       
-      pause
+*      pause
       
       
       

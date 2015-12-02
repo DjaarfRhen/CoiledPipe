@@ -113,9 +113,9 @@ C Solve A * X(i) = B(i)
 	  
 	  
 	  
-      write(*,*)'  Ub=',Ub
-      write(*,*)'  Ub_cur=',su/ss
-      write(*,*)'  Dp=',Dp
+*      write(*,*)'  Ub=',Ub
+*      write(*,*)'  Ub_cur=',su/ss
+*      write(*,*)'  Dp=',Dp
       
   
       
@@ -133,7 +133,7 @@ c         write(*,*)'  div(',i,',',j,',',k,')=',d
       end do
       end do
       end do
-      write(*,*)'  div(u_rp)=',dd1
+*      write(*,*)'  div(u_rp)=',dd1
 
 
 
@@ -154,8 +154,8 @@ c         write(*,*)'  div(',i,',',j,',',k,')=',d
       end do
       end do
       end do
-      write(*,*)'  div(u_pres)=',dd2
-      write(*,*)'  div(u_pres)/div(u_rp)=',dd2/dd1
+*      write(*,*)'  div(u_pres)=',dd2
+*      write(*,*)'  div(u_pres)/div(u_rp)=',dd2/dd1
               
             
             
@@ -195,9 +195,9 @@ c         write(*,*)'  div(',i,',',j,',',k,')=',d
       Dp2=Ub-su/ss
 
  
-      write(*,*)'  Ub2=',Ub
-      write(*,*)'  Ub_cur2=',su/ss
-      write(*,*)'  Dp2=',Dp2            
+*      write(*,*)'  Ub2=',Ub
+*      write(*,*)'  Ub_cur2=',su/ss
+*      write(*,*)'  Dp2=',Dp2            
             
             
             
