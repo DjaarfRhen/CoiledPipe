@@ -181,6 +181,16 @@ c        smn(i,k)=-rkap*cos(tt-tors*s)
         end do
       end do
 
+      open(unit=123, file='log/u_hss.txt') 
+      do k=1,Km
+        do j=1,Jm
+            do i=1,Im
+              write(123,*) u(i,j,k)
+            end do
+        end do
+      end do
+      close(123)
+      
       do k=1,Km
         do i=1,Im
           do j=1,Jm
@@ -263,7 +273,34 @@ C CHECK: save rhs to file
       end do
       end do
       write(*,*)'  div(u_p0)=',dd
-            
+
+
+      open(unit=123, file='log/p0.txt') 
+      do k=1,Km
+        do j=1,Jm
+            do i=1,Im
+              write(123,*) p0(i,j,k)
+            end do
+        end do
+      end do
+      close(123)
+
+      open(unit=123, file='log/p.txt') 
+      do k=1,Km
+        do j=1,Jm
+            do i=1,Im
+              write(123,*) p(i,j,k)
+            end do
+        end do
+      end do
+      close(123)
+
+
+
+
+      
+
+        
 *  Mean pressure gradient
 *     ss=0.d0
 *     su=0.d0

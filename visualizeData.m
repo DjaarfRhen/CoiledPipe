@@ -1,5 +1,6 @@
 
 folder = 'log/';
+%format = '-djpeg';
 format = '-deps';
 step1 = 2;
 step2 = 2;

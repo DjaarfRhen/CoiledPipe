@@ -1,6 +1,6 @@
 function [] = helix()
 
-%    helixCurvTors(0.1, 0.1);
+    helixCurvTors(0.2, 0.4);
 %    hold on;
 %     helixCurvTors(0.01, 0.1);
 %     hold on;
@@ -8,7 +8,7 @@ function [] = helix()
 %     hold on;
 %     helixCurvTors(0.01, 1.0);
 %     hold on;
-    helixRadPitch(5,100/(2*pi));
+%    helixRadPitch(5,100/(2*pi));
 %    hold off;
     
 end

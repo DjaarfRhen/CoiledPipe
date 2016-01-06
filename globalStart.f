@@ -1,7 +1,7 @@
 *
 *     program an
       implicit real*8 (a-h,o-z)
-      parameter (Imax=257, Jmax=65, Kmax=257, N=1e5, NZ=1e7)
+      parameter (Imax=257, Jmax=129, Kmax=257, N=1e5, NZ=1e7)
       character*1 getcharqq
       logical peekcharqq
       character*12 fncp,fndat
@@ -49,9 +49,9 @@
 * corresponding END DO is in line ~444     
 *      do ind_rad=0,0
 *      do ind_pitch=0,0
-      do ind_rad=1,10
-      do ind_pitch=0,0
-      do ind_Re=1,10
+      do ind_rad=1,1
+      do ind_pitch=1,1
+      do ind_Re=10,10
 *      do ind_rad=1,40
 *      do ind_pitch=0,40
       
@@ -87,19 +87,20 @@
       t = 0.0
       
 * I wanted to do 5* and 5* for 40x40 map     
-*      Rad = 5      
-      Rad       = 10.0*ind_rad
-      HelixStep = 2.0*ind_pitch      
+      Rad = 5      
+*      Rad       = 1.0*ind_rad
+*      HelixStep = 6.0*ind_pitch 
+      HelixStep = 6.0    
 * helix pitch      
       Pitch = HelixStep/(2*pi)   
       
 * curvature      
       rkap = abs(Rad)/(Rad**2+Pitch**2)
-*      rkap = 0
+*      rkap = 0.0
       
 * torsion      
       tors = Pitch/(Rad**2+Pitch**2)
-*      tors = 0      
+*      tors = 0.0      
       
       Re = 200*ind_Re
       
@@ -113,14 +114,18 @@
       
  
         open(unit=1, file='log/parameters.txt') 
-        write(1,*) Re,Xmax,ind_rad,ind_pitch,Rad,HelixStep,rkap,tors
+        write(1,*) Re,Xmax,rkap,tors,epsr,Im,Jm,Km
+*        write(1,*) Re,Xmax,ind_rad,ind_pitch,Rad,HelixStep,rkap,tors
         close(1)
- 
 *      rkap = 0
 *      tors = 0
       
       call com(u,v,w,p,p0,Imax,Jmax,N,NZ)
 
+      open(unit=1, file='log/parameters.txt', access='append') 
+      write(1,*) ind_rad,ind_pitch,Rad,HelixStep
+      close(1)
+      
 *
       write(*,*)' ***************************************************'
       write(*,200) t,dt,Re,Xmax,rkap,tors,epsr,kd,Im,Jm,Km
@@ -432,45 +437,45 @@
 *        write(1,*) Re,Xmax,rkap,tors,epsr,Im,Jm,Km
 *        close(1)
 *        
-*        open(unit=1, file='log/u.txt') 
-*        do i=0,Im
-*          do j=1,Jm
-*            do k=1,Km
-*              write(1,*) u(i,j,k)
-*            end do
-*          end do
-*        end do
-*        close(1)
-*        
-*        open(unit=1, file='log/v.txt') 
-*        do i=1,Im
-*          do j=0,Jm
-*            do k=1,Km
-*              write(1,*) v(i,j,k)
-*            end do
-*          end do
-*        end do
-*        close(1)
-*        
-*        open(unit=1, file='log/w.txt') 
-*        do i=1,Im
-*          do j=1,Jm
-*            do k=0,Km
-*              write(1,*) w(i,j,k)
-*            end do
-*          end do
-*        end do
-*        close(1)
-*        
-*        open(unit=1, file='log/p.txt') 
-*        do i=1,Im
-*          do j=1,Jm
-*            do k=1,Km
-*              write(1,*) p(i,j,k)
-*            end do
-*          end do
-*        end do
-*        close(1)
+        open(unit=1, file='log/u.txt') 
+        do i=0,Im
+          do j=1,Jm
+            do k=1,Km
+              write(1,*) u(i,j,k)
+            end do
+          end do
+        end do
+        close(1)
+        
+        open(unit=1, file='log/v.txt') 
+        do i=1,Im
+          do j=0,Jm
+            do k=1,Km
+              write(1,*) v(i,j,k)
+            end do
+          end do
+        end do
+        close(1)
+        
+        open(unit=1, file='log/w.txt') 
+        do i=1,Im
+          do j=1,Jm
+            do k=0,Km
+              write(1,*) w(i,j,k)
+            end do
+          end do
+        end do
+        close(1)
+        
+        open(unit=1, file='log/p.txt') 
+        do i=1,Im
+          do j=1,Jm
+            do k=1,Km
+              write(1,*) p(i,j,k)
+            end do
+          end do
+        end do
+        close(1)
         
 *        write(*,*)'*************************************************'
 *        write(*,*)'*               Control Point                   *'

@@ -29,15 +29,29 @@
 
 
 *
+*      do k=1,Km
+*        do i=1,Im
+*          v(i,Jm,k)=0.d0
+*          do j=1,Jm
+*            call div(i,j,k,u,v,w,d,Imax,Jmax)
+*            rhs(i+(j-1)*Im+(k-1)*Im*Jm)=d
+*          end do
+*        end do
+*      end do
+      
       do k=1,Km
         do i=1,Im
-          v(i,Jm,k)=0.d0
-          do j=1,Jm
+          do j=1,(Jm-1)
             call div(i,j,k,u,v,w,d,Imax,Jmax)
             rhs(i+(j-1)*Im+(k-1)*Im*Jm)=d
           end do
+          call div(i,Jm,k,u,v,w,d,Imax,Jmax)
+          hss = 1. + yt(Jm)  * smm(i,k)
+          hsr1= 1. + rt(Jm)  * smm(i,k)
+          rhs(i+(Jm-1)*Im+(k-1)*Im*Jm) = d - 
+     >                  rt(Jm)*hsr1*v(i,Jm,k)/(yt(Jm)*yt1(Jm)*hss)
         end do
-      end do
+      end do      
              
       rhs(1)=0.0
 
